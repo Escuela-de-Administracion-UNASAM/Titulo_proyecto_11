@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Títulos de Investigación | Escuela de Administración - UNASAM</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Merriweather para vista previa académica -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        unasam: {
+                            blue: '#0B2545',      // Azul marino institucional profundo
+                            navy: '#13315C',      // Azul institucional secundario
+                            gold: '#D4A017',      // Dorado académico
+                            goldLight: '#F4E3B2', // Dorado suave para fondos/bordes
+                            slate: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Encabezado Institucional UNASAM -->
+    <header class="bg-unasam-blue text-white shadow-lg border-b-4 border-unasam-gold">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 text-center sm:text-left">
+                <!-- Emblema SVG Académico -->
+                <div class="w-12 h-12 rounded-xl bg-unasam-navy border border-unasam-gold/50 flex items-center justify-center shrink-0 shadow-inner">
+                    <svg class="w-7 h-7 text-unasam-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center justify-center sm:justify-start gap-2">
+                        <span class="text-xs font-bold tracking-wider uppercase text-unasam-gold">UNASAM • FCA</span>
+                        <span class="text-slate-400 text-xs">•</span>
+                        <span class="text-xs text-slate-300">Escuela Profesional de Administración</span>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white mt-0.5">
+                        Generador de Títulos de Investigación
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Botones de Acción Rápida en Header -->
+            <div class="flex flex-wrap items-center justify-center gap-2">
+                <button type="button" onclick="cargarEjemplo()" class="px-3.5 py-2 rounded-lg bg-unasam-navy hover:bg-blue-900 text-unasam-gold border border-unasam-gold/40 text-xs sm:text-sm font-medium transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Cargar ejemplo Administración
+                </button>
+                <button type="button" onclick="limpiarFormulario()" class="px-3.5 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs sm:text-sm font-medium transition flex items-center gap-1.5 cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    Limpiar campos
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        
+        <!-- Guía rápida metodológica -->
+        <div class="bg-blue-50 border-l-4 border-unasam-blue rounded-r-xl p-4 mb-6 shadow-sm flex items-start gap-3">
+            <svg class="w-5 h-5 text-unasam-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <strong class="text-unasam-blue font-semibold">Estructura metodológica UNASAM:</strong> Un título de proyecto de tesis cuantitativo se compone de: <span class="font-medium text-slate-900">[Variable(s) 1] + [Conector según nivel] + [Variable(s) 2] + [Población] + [Organización/Empresa] + [Lugar] + [Año]</span>. Recuerda que los títulos académicos <strong>no llevan punto final</strong> y se recomienda no exceder las 20–25 palabras.
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- COLUMNA IZQUIERDA: Formulario de Configuración (7 columnas en desktop) -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- Paso 1: Nivel y Diseño de Variables -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
+                        <span class="w-7 h-7 rounded-full bg-unasam-blue text-white text-xs font-bold flex items-center justify-center">1</span>
+                        <h2 class="text-base sm:text-lg font-bold text-unasam-blue">Nivel de Investigación y Diseño</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                        <!-- Selector de Nivel -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Nivel de Estudio</label>
+                            <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
+                                <button type="button" id="btnNivelCorrelacional" onclick="cambiarNivel('correlacional')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer">
+                                    Correlacional
+                                </button>
+                                <button type="button" id="btnNivelExplicativo" onclick="cambiarNivel('explicativo')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer">
+                                    Explicativo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Selector de Cantidad de Variables -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Tipo de Relación (Variables)</label>
+                            <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
+                                <button type="button" id="btnTipoBivariada" onclick="cambiarTipoVariables('bivariada')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer">
+                                    Bivariada (2)
+                                </button>
+                                <button type="button" id="btnTipoMultivariada" onclick="cambiarTipoVariables('multivariada')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer">
+                                    Multivariada (3+)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conector Lógico Dinámico -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                            <label for="selectConector" class="text-sm font-semibold text-slate-700">
+                                Nexo o Conector de Estudio (<span id="etiquetaNivelConector" class="text-unasam-blue">Nivel Correlacional</span>)
+                            </label>
+                            <span id="badgeDescripcionNivel" class="inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                                Asocia variables sin causalidad
+                            </span>
+                        </div>
+                        
+                        <select id="selectConector" onchange="manejarCambioConector()" class="w-full rounded-xl border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            <!-- Opciones pobladas dinámicamente por JS -->
+                        </select>
+
+                        <!-- Input para Conector Personalizado (Oculto por defecto) -->
+                        <div id="contenedorConectorPersonalizado" class="hidden mt-3">
+                            <label for="inputConectorPersonalizado" class="block text-xs font-medium text-slate-600 mb-1">Escribe tu conector personalizado:</label>
+                            <input type="text" id="inputConectorPersonalizado" oninput="actualizarTitulo()" placeholder="Ej. y su incidencia directa en / en relación con" class="w-full rounded-xl border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Paso 2: Variables de Investigación -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-7 h-7 rounded-full bg-unasam-blue text-white text-xs font-bold flex items-center justify-center">2</span>
+                            <h2 class="text-base sm:text-lg font-bold text-unasam-blue">Variables de Estudio</h2>
+                        </div>
+                        <span id="badgeModoVariables" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">
+                            Modo Bivariado
+                        </span>
+                    </div>
+
+                    <!-- Grupo Variable 1 / Independiente(s) -->
+                    <div class="mb-5">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label id="labelVar1" for="var1_0" class="block text-sm font-semibold text-slate-700">
+                                Variable 1 (o Variable Independiente)
+                            </label>
+                            <button type="button" id="btnAddVar1" onclick="agregarVariable(1)" class="hidden text-xs font-semibold text-unasam-blue hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer">
+                                <span>+ Agregar Variable 1</span>
+                            </button>
+                        </div>
+                        
+                        <div id="contenedorVars1" class="space-y-2.5">
+                            <div class="flex items-center gap-2">
+                                <input type="text" id="var1_0" oninput="actualizarTitulo()" placeholder="Ej. El clima organizacional / La gestión del talento humano" class="var1-input w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1">Consejo: Incluye el artículo inicial si suena más natural (ej. "La calidad de servicio", "El liderazgo transformacional").</p>
+                    </div>
+
+                    <!-- Grupo Variable 2 / Dependiente(s) -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label id="labelVar2" for="var2_0" class="block text-sm font-semibold text-slate-700">
+                                Variable 2 (o Variable Dependiente)
+                            </label>
+                            <button type="button" id="btnAddVar2" onclick="agregarVariable(2)" class="hidden text-xs font-semibold text-unasam-blue hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer">
+                                <span>+ Agregar Variable 2</span>
+                            </button>
+                        </div>
+
+                        <div id="contenedorVars2" class="space-y-2.5">
+                            <div class="flex items-center gap-2">
+                                <input type="text" id="var2_0" oninput="actualizarTitulo()" placeholder="Ej. el desempeño laboral / la satisfacción del cliente" class="var2-input w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Paso 3: Delimitación Poblacional, Espacial y Temporal -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
+                        <span class="w-7 h-7 rounded-full bg-unasam-blue text-white text-xs font-bold flex items-center justify-center">3</span>
+                        <h2 class="text-base sm:text-lg font-bold text-unasam-blue">Delimitación de la Investigación</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Población / Unidad de Análisis -->
+                        <div>
+                            <label for="inputPoblacion" class="block text-sm font-semibold text-slate-700 mb-1">
+                                Población o Unidad de Análisis
+                            </label>
+                            <input type="text" id="inputPoblacion" oninput="actualizarTitulo()" placeholder="Ej. en los colaboradores / en los clientes / en los microempresarios" class="w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            
+                            <!-- Sugerencias rápidas clicables -->
+                            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+                                <span class="text-[11px] text-slate-400 mr-1">Sugerencias:</span>
+                                <button type="button" onclick="setSugerencia('inputPoblacion', 'en los colaboradores')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">en los colaboradores</button>
+                                <button type="button" onclick="setSugerencia('inputPoblacion', 'en los trabajadores administrativos')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">en los trabajadores administrativos</button>
+                                <button type="button" onclick="setSugerencia('inputPoblacion', 'en los clientes')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">en los clientes</button>
+                                <button type="button" onclick="setSugerencia('inputPoblacion', 'en los usuarios')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">en los usuarios</button>
+                                <button type="button" onclick="setSugerencia('inputPoblacion', 'en las MYPES')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">en las MYPES</button>
+                            </div>
+                        </div>
+
+                        <!-- Organización / Empresa / Sector -->
+                        <div>
+                            <label for="inputOrganizacion" class="block text-sm font-semibold text-slate-700 mb-1">
+                                Organización, Empresa o Sector
+                            </label>
+                            <input type="text" id="inputOrganizacion" oninput="actualizarTitulo()" placeholder="Ej. de la Municipalidad Provincial de Huaraz / del sector hotelero" class="w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            
+                            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+                                <span class="text-[11px] text-slate-400 mr-1">Ejemplos locales:</span>
+                                <button type="button" onclick="setSugerencia('inputOrganizacion', 'de la Municipalidad Provincial de Huaraz')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">Municipalidad Provincial de Huaraz</button>
+                                <button type="button" onclick="setSugerencia('inputOrganizacion', 'del Gobierno Regional de Áncash')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">Gobierno Regional de Áncash</button>
+                                <button type="button" onclick="setSugerencia('inputOrganizacion', 'del sector turismo')" class="text-[11px] bg-slate-100 hover:bg-unasam-blue hover:text-white text-slate-600 px-2.5 py-1 rounded-md transition cursor-pointer">del sector turismo</button>
+                            </div>
+                        </div>
+
+                        <!-- Lugar y Año -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="sm:col-span-2">
+                                <label for="inputLugar" class="block text-sm font-semibold text-slate-700 mb-1">
+                                    Lugar / Ámbito Geográfico
+                                </label>
+                                <input type="text" id="inputLugar" oninput="actualizarTitulo()" placeholder="Ej. Huaraz / Huaraz, Áncash / Distrito de Independencia" class="w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            </div>
+
+                            <div>
+                                <label for="inputAnio" class="block text-sm font-semibold text-slate-700 mb-1">
+                                    Año / Periodo
+                                </label>
+                                <input type="text" id="inputAnio" value="2026" oninput="actualizarTitulo()" placeholder="Ej. 2026" class="w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- COLUMNA DERECHA: Vista Previa en Tiempo Real y Opciones de Copiado (5 columnas en desktop, sticky) -->
+            <div class="lg:col-span-5 lg:sticky lg:top-6 space-y-5">
+                
+                <!-- Tarjeta de Resultado -->
+                <div class="bg-white rounded-2xl shadow-md border-2 border-unasam-blue/20 overflow-hidden">
+                    <!-- Barra superior de la tarjeta -->
+                    <div class="bg-unasam-blue px-5 py-3.5 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-unasam-gold animate-pulse"></span>
+                            <h3 class="text-sm font-bold text-white tracking-wide uppercase">Vista Previa del Título</h3>
+                        </div>
+                        <span id="contadorPalabras" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-unasam-navy text-unasam-gold border border-unasam-gold/30">
+                            0 palabras
+                        </span>
+                    </div>
+
+                    <div class="p-5 sm:p-6">
+                        <!-- Controles de Formato Rápido -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-slate-100 text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="text-slate-500 font-medium">Capitalización:</span>
+                                <select id="selectCapitalizacion" onchange="actualizarTitulo()" class="rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1 text-slate-700 font-medium focus:border-unasam-blue outline-none">
+                                    <option value="oracion">Tipo oración (Normal)</option>
+                                    <option value="mayusculas">TODO MAYÚSCULAS</option>
+                                </select>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <span class="text-slate-500 font-medium">Separador final:</span>
+                                <select id="selectSeparadorFinal" onchange="actualizarTitulo()" class="rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1 text-slate-700 font-medium focus:border-unasam-blue outline-none">
+                                    <option value="coma">, Lugar, Año</option>
+                                    <option value="guion">, Lugar - Año</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Caja donde se renderiza el título generado -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 min-h-[160px] flex flex-col justify-center relative group">
+                            <p id="tituloGenerado" class="font-serif text-base sm:text-lg text-slate-900 leading-relaxed text-center select-all">
+                                <!-- El título dinámico aparecerá aquí -->
+                            </p>
+                            <p id="placeholderVacio" class="text-sm text-slate-400 text-center italic">
+                                Completa los campos de la izquierda para construir automáticamente el título de tu proyecto de investigación...
+                            </p>
+                        </div>
+
+                        <!-- Indicador de validación metodológica -->
+                        <div id="alertaExtension" class="mt-3 text-xs flex items-center justify-between text-slate-500">
+                            <span class="flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Sin punto final automático
+                            </span>
+                            <span id="estadoPalabras" class="font-medium text-slate-500">Longitud óptima: 15 - 25 palabras</span>
+                        </div>
+
+                        <!-- Botones de Copiado al Portapapeles -->
+                        <div class="mt-5 space-y-2.5">
+                            <!-- Botón Principal: Copiar título -->
+                            <button type="button" onclick="copiarAlPortapapeles('normal')" class="w-full py-3 px-4 rounded-xl bg-unasam-blue hover:bg-unasam-navy active:scale-[0.99] text-white font-semibold text-sm shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                                <svg class="w-5 h-5 text-unasam-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                Copiar título
+                            </button>
+
+                            <!-- Botón Secundario: Copiar sin ningún formato (Texto Plano Puro) -->
+                            <button type="button" onclick="copiarAlPortapapeles('plano')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-[0.99] text-slate-700 border border-slate-300 font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer" title="Copia texto plano puro sin estilos HTML, fuentes ni negritas para pegar directo en Word o Google Docs">
+                                <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Copiar sin ningún formato (solo texto plano)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Desglose de Componentes -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Estructura detectada</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-start justify-between gap-2 pb-1.5 border-b border-slate-100">
+                            <span class="text-slate-500 font-medium shrink-0">Variable(s) 1:</span>
+                            <span id="resumenVar1" class="text-slate-800 font-semibold text-right truncate max-w-[220px]">—</span>
+                        </li>
+                        <li class="flex items-start justify-between gap-2 pb-1.5 border-b border-slate-100">
+                            <span class="text-slate-500 font-medium shrink-0">Conector:</span>
+                            <span id="resumenConector" class="text-unasam-blue font-semibold text-right">—</span>
+                        </li>
+                        <li class="flex items-start justify-between gap-2 pb-1.5 border-b border-slate-100">
+                            <span class="text-slate-500 font-medium shrink-0">Variable(s) 2:</span>
+                            <span id="resumenVar2" class="text-slate-800 font-semibold text-right truncate max-w-[220px]">—</span>
+                        </li>
+                        <li class="flex items-start justify-between gap-2">
+                            <span class="text-slate-500 font-medium shrink-0">Contexto:</span>
+                            <span id="resumenContexto" class="text-slate-800 font-semibold text-right truncate max-w-[220px]">—</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página institucional -->
+    <footer class="bg-white border-t border-slate-200 py-5 mt-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 text-center sm:text-left">
+            <p>Herramienta de apoyo metodológico para estudiantes de la <strong>Escuela Profesional de Administración - UNASAM</strong>.</p>
+            <p>Facultad de Ciencias Económicas y Contables / Facultad de Administración y Turismo • Huaraz, Áncash.</p>
+        </div>
+    </footer>
+
+    <!-- Notificación Toast Flotante -->
+    <div id="toastNotificacion" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-unasam-blue text-white px-4 py-3 rounded-xl shadow-xl border border-unasam-gold/50 flex items-center gap-3 max-w-sm">
+        <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <div>
+            <p id="toastTitulo" class="text-sm font-semibold text-white">Copiado al portapapeles</p>
+            <p id="toastSubtitulo" class="text-xs text-slate-300">Listo para pegar en tu documento.</p>
+        </div>
+    </div>
+
+    <!-- Lógica JavaScript -->
+    <script>
+        // Estado global de la aplicación
+        const estado = {
+            nivel: 'correlacional', // 'correlacional' | 'explicativo'
+            tipoVariables: 'bivariada', // 'bivariada' | 'multivariada'
+            conectores: {
+                correlacional: [
+                    { valor: 'y', texto: 'y (Ej. Variable 1 y Variable 2)' },
+                    { valor: 'y su relación con', texto: 'y su relación con' },
+                    { valor: 'asociado a', texto: 'asociado a' },
+                    { valor: 'asociada a', texto: 'asociada a' },
+                    { valor: 'personalizado', texto: 'Personalizado...' }
+                ],
+                explicativo: [
+                    { valor: 'y su influencia en', texto: 'y su influencia en' },
+                    { valor: 'y su impacto en', texto: 'y su impacto en' },
+                    { valor: 'y su incidencia en', texto: 'y su incidencia en' },
+                    { valor: 'personalizado', texto: 'Personalizado...' }
+                ]
+            }
+        };
+
+        // Inicialización al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            poblarConectores();
+            actualizarTitulo();
+        });
+
+        // Cambiar entre Nivel Correlacional y Nivel Explicativo
+        function cambiarNivel(nuevoNivel) {
+            estado.nivel = nuevoNivel;
+
+            const btnCorr = document.getElementById('btnNivelCorrelacional');
+            const btnExpl = document.getElementById('btnNivelExplicativo');
+            const etiquetaNivel = document.getElementById('etiquetaNivelConector');
+            const badgeDesc = document.getElementById('badgeDescripcionNivel');
+
+            if (nuevoNivel === 'correlacional') {
+                btnCorr.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer';
+                btnExpl.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer';
+                etiquetaNivel.textContent = 'Nivel Correlacional';
+                badgeDesc.textContent = 'Mide grado de relación/asociación';
+                badgeDesc.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800';
+            } else {
+                btnExpl.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer';
+                btnCorr.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer';
+                etiquetaNivel.textContent = 'Nivel Explicativo';
+                badgeDesc.textContent = 'Evalúa causa-efecto / influencia';
+                badgeDesc.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-blue-100 text-unasam-blue';
+            }
+
+            poblarConectores();
+            actualizarTitulo();
+        }
+
+        // Poblar el select de conectores según el nivel activo
+        function poblarConectores() {
+            const select = document.getElementById('selectConector');
+            const opciones = estado.conectores[estado.nivel];
+            
+            select.innerHTML = '';
+            opciones.forEach(op => {
+                const optionEl = document.createElement('option');
+                optionEl.value = op.valor;
+                optionEl.textContent = op.texto;
+                select.appendChild(optionEl);
+            });
+
+            manejarCambioConector();
+        }
+
+        // Mostrar u ocultar el campo de conector personalizado
+        function manejarCambioConector() {
+            const select = document.getElementById('selectConector');
+            const contenedorPers = document.getElementById('contenedorConectorPersonalizado');
+            
+            if (select.value === 'personalizado') {
+                contenedorPers.classList.remove('hidden');
+                document.getElementById('inputConectorPersonalizado').focus();
+            } else {
+                contenedorPers.classList.add('hidden');
+            }
+            actualizarTitulo();
+        }
+
+        // Cambiar entre Bivariada y Multivariada
+        function cambiarTipoVariables(nuevoTipo) {
+            estado.tipoVariables = nuevoTipo;
+
+            const btnBi = document.getElementById('btnTipoBivariada');
+            const btnMulti = document.getElementById('btnTipoMultivariada');
+            const btnAdd1 = document.getElementById('btnAddVar1');
+            const btnAdd2 = document.getElementById('btnAddVar2');
+            const badgeModo = document.getElementById('badgeModoVariables');
+            const labelVar1 = document.getElementById('labelVar1');
+            const labelVar2 = document.getElementById('labelVar2');
+
+            if (nuevoTipo === 'bivariada') {
+                btnBi.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer';
+                btnMulti.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer';
+                
+                btnAdd1.classList.add('hidden');
+                btnAdd2.classList.add('hidden');
+                badgeModo.textContent = 'Modo Bivariado (2 variables)';
+                labelVar1.textContent = 'Variable 1 (o Variable Independiente)';
+                labelVar2.textContent = 'Variable 2 (o Variable Dependiente)';
+
+                // Eliminar inputs extra si se regresa a bivariada
+                limpiarVariablesExtra('contenedorVars1');
+                limpiarVariablesExtra('contenedorVars2');
+            } else {
+                btnMulti.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-unasam-blue text-white shadow-sm cursor-pointer';
+                btnBi.className = 'py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-unasam-blue cursor-pointer';
+                
+                btnAdd1.classList.remove('hidden');
+                btnAdd2.classList.remove('hidden');
+                badgeModo.textContent = 'Modo Multivariado (3+ variables)';
+                labelVar1.textContent = 'Variables Independientes / Grupo 1';
+                labelVar2.textContent = 'Variables Dependientes / Grupo 2';
+
+                // Si no hay una segunda variable en el grupo 1, agregar una automáticamente para facilitar el uso
+                const cont1 = document.getElementById('contenedorVars1');
+                if (cont1.children.length === 1) {
+                    agregarVariable(1);
+                }
+            }
+
+            actualizarTitulo();
+        }
+
+        // Eliminar inputs extra al volver a modo bivariado
+        function limpiarVariablesExtra(contenedorId) {
+            const contenedor = document.getElementById(contenedorId);
+            while (contenedor.children.length > 1) {
+                contenedor.removeChild(contenedor.lastChild);
+            }
+        }
+
+        // Agregar dinámicamente un campo de variable en modo multivariado
+        function agregarVariable(grupo, valorInicial = '') {
+            const contenedorId = grupo === 1 ? 'contenedorVars1' : 'contenedorVars2';
+            const contenedor = document.getElementById(contenedorId);
+            const indice = contenedor.children.length + 1;
+
+            const fila = document.createElement('div');
+            fila.className = 'flex items-center gap-2 animate-fadeIn';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = valorInicial;
+            input.className = `var${grupo}-input w-full rounded-xl border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 border focus:border-unasam-blue focus:ring-2 focus:ring-unasam-blue/20 outline-none transition`;
+            input.placeholder = grupo === 1 
+                ? `Variable 1.${indice} (Ej. la motivación laboral)` 
+                : `Variable 2.${indice} (Ej. la productividad)`;
+            input.addEventListener('input', actualizarTitulo);
+
+            const btnEliminar = document.createElement('button');
+            btnEliminar.type = 'button';
+            btnEliminar.title = 'Eliminar esta variable';
+            btnEliminar.className = 'p-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition shrink-0 cursor-pointer';
+            btnEliminar.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+            btnEliminar.onclick = () => {
+                fila.remove();
+                actualizarTitulo();
+            };
+
+            fila.appendChild(input);
+            fila.appendChild(btnEliminar);
+            contenedor.appendChild(fila);
+            actualizarTitulo();
+        }
+
+        // Helper para unir una lista de variables con gramática en español ("A, B y C")
+        function unirGramaticalmente(listaTextos) {
+            const limpios = listaTextos
+                .map(t => t.trim().replace(/\s+/g, ' '))
+                .filter(t => t.length > 0);
+
+            if (limpios.length === 0) return '';
+            if (limpios.length === 1) return limpios[0];
+            if (limpios.length === 2) {
+                // Si la segunda empieza con "i" o "hi", usar "e" por regla gramatical
+                const conjuncion = /^(i|hi|í|hí)/i.test(limpios[1]) ? ' e ' : ' y ';
+                return `${limpios[0]}${conjuncion}${limpios[1]}`;
+            }
+
+            const todasMenosUltima = limpios.slice(0, -1).join(', ');
+            const ultima = limpios[limpios.length - 1];
+            const conjuncion = /^(i|hi|í|hí)/i.test(ultima) ? ' e ' : ' y ';
+            return `${todasMenosUltima}${conjuncion}${ultima}`;
+        }
+
+        // Insertar sugerencia rápida en un input
+        function setSugerencia(inputId, texto) {
+            const input = document.getElementById(inputId);
+            input.value = texto;
+            actualizarTitulo();
+        }
+
+        // Función principal: Construir y actualizar el título en tiempo real
+        function actualizarTitulo() {
+            // 1. Obtener variables del grupo 1
+            const inputsVar1 = Array.from(document.querySelectorAll('.var1-input')).map(el => el.value);
+            const textoVar1 = unirGramaticalmente(inputsVar1);
+
+            // 2. Obtener conector
+            const selectConector = document.getElementById('selectConector');
+            let textoConector = '';
+            if (selectConector.value === 'personalizado') {
+                textoConector = document.getElementById('inputConectorPersonalizado').value.trim();
+            } else {
+                textoConector = selectConector.value;
+            }
+
+            // 3. Obtener variables del grupo 2
+            const inputsVar2 = Array.from(document.querySelectorAll('.var2-input')).map(el => el.value);
+            const textoVar2 = unirGramaticalmente(inputsVar2);
+
+            // 4. Obtener campos contextuales
+            const poblacion = document.getElementById('inputPoblacion').value.trim();
+            const organizacion = document.getElementById('inputOrganizacion').value.trim();
+            const lugar = document.getElementById('inputLugar').value.trim();
+            const anio = document.getElementById('inputAnio').value.trim();
+            const separadorFinal = document.getElementById('selectSeparadorFinal').value;
+            const capitalizacion = document.getElementById('selectCapitalizacion').value;
+
+            // Actualizar tarjeta de resumen estructural
+            document.getElementById('resumenVar1').textContent = textoVar1 || '—';
+            document.getElementById('resumenConector').textContent = textoConector || '—';
+            document.getElementById('resumenVar2').textContent = textoVar2 || '—';
+            const partesContextoResumen = [poblacion, organizacion, lugar, anio].filter(Boolean);
+            document.getElementById('resumenContexto').textContent = partesContextoResumen.length ? partesContextoResumen.join(' • ') : '—';
+
+            // 5. Ensamblar las partes del título
+            let bloquesPrincipales = [];
+
+            if (textoVar1) bloquesPrincipales.push(textoVar1);
+            if (textoConector && (textoVar1 || textoVar2)) bloquesPrincipales.push(textoConector);
+            if (textoVar2) bloquesPrincipales.push(textoVar2);
+            if (poblacion) bloquesPrincipales.push(poblacion);
+            if (organizacion) bloquesPrincipales.push(organizacion);
+
+            let tituloBase = bloquesPrincipales.join(' ');
+
+            // Añadir Lugar y Año con formato académico limpio
+            let bloqueEspacioTemporal = '';
+            if (lugar && anio) {
+                bloqueEspacioTemporal = separadorFinal === 'guion' 
+                    ? `, ${lugar} - ${anio}` 
+                    : `, ${lugar}, ${anio}`;
+            } else if (lugar) {
+                bloqueEspacioTemporal = `, ${lugar}`;
+            } else if (anio) {
+                bloqueEspacioTemporal = separadorFinal === 'guion' 
+                    ? ` - ${anio}` 
+                    : `, ${anio}`;
+            }
+
+            let tituloCompleto = (tituloBase + bloqueEspacioTemporal).trim();
+
+            // Limpieza estricta: eliminar espacios múltiples, espacios antes de comas y NUNCA dejar punto final
+            tituloCompleto = tituloCompleto
+                .replace(/\s+/g, ' ')
+                .replace(/\s+,/g, ',')
+                .replace(/^[,\-\s]+/, '') // Evitar comas o guiones al inicio si faltan variables
+                .replace(/\.+$/, '')      // Eliminar cualquier punto final
+                .trim();
+
+            // Aplicar capitalización seleccionada
+            if (tituloCompleto.length > 0) {
+                if (capitalizacion === 'mayusculas') {
+                    tituloCompleto = tituloCompleto.toUpperCase();
+                } else {
+                    // Asegurar que la primera letra del título esté en mayúscula (Tipo oración)
+                    tituloCompleto = tituloCompleto.charAt(0).toUpperCase() + tituloCompleto.slice(1);
+                }
+            }
+
+            // Renderizar en la vista previa
+            const elTitulo = document.getElementById('tituloGenerado');
+            const elPlaceholder = document.getElementById('placeholderVacio');
+            const elContador = document.getElementById('contadorPalabras');
+            const elEstadoPalabras = document.getElementById('estadoPalabras');
+
+            if (tituloCompleto.length > 0) {
+                elTitulo.textContent = tituloCompleto;
+                elTitulo.classList.remove('hidden');
+                elPlaceholder.classList.add('hidden');
+
+                // Contar palabras
+                const numPalabras = tituloCompleto.split(/\s+/).filter(Boolean).length;
+                elContador.textContent = `${numPalabras} ${numPalabras === 1 ? 'palabra' : 'palabras'}`;
+
+                if (numPalabras > 25) {
+                    elEstadoPalabras.textContent = 'Sugerencia: Intenta sintetizar (más de 25 palabras)';
+                    elEstadoPalabras.className = 'font-medium text-amber-600';
+                } else if (numPalabras >= 12) {
+                    elEstadoPalabras.textContent = 'Extensión académica ideal';
+                    elEstadoPalabras.className = 'font-medium text-emerald-600';
+                } else {
+                    elEstadoPalabras.textContent = 'Longitud óptima: 15 - 25 palabras';
+                    elEstadoPalabras.className = 'font-medium text-slate-500';
+                }
+            } else {
+                elTitulo.textContent = '';
+                elTitulo.classList.add('hidden');
+                elPlaceholder.classList.remove('hidden');
+                elContador.textContent = '0 palabras';
+                elEstadoPalabras.textContent = 'Longitud óptima: 15 - 25 palabras';
+                elEstadoPalabras.className = 'font-medium text-slate-500';
+            }
+        }
+
+        // Copiar al portapapeles (Soporta modo normal y modo texto plano sin formato)
+        async function copiarAlPortapapeles(modo) {
+            const textoCrudo = document.getElementById('tituloGenerado').textContent || '';
+            
+            // Garantizar texto plano puro sin saltos de línea, sin espacios extra y sin punto final
+            const textoLimpio = textoCrudo
+                .replace(/[\r\n\t]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .replace(/\.+$/, '')
+                .trim();
+
+            if (!textoLimpio) {
+                mostrarToast('Nada que copiar aún', 'Escribe al menos una variable para generar el título.', true);
+                return;
+            }
+
+            let copiadoExitoso = false;
+
+            // Intentar primero con API moderna de portapapeles (escribe estrictamente text/plain)
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(textoLimpio);
+                    copiadoExitoso = true;
+                } catch (err) {
+                    copiadoExitoso = false;
+                }
+            }
+
+            // Fallback seguro mediante textarea oculto (garantiza 0% formato HTML al pegar en Word/Docs)
+            if (!copiadoExitoso) {
+                const textareaOculto = document.createElement('textarea');
+                textareaOculto.value = textoLimpio;
+                textareaOculto.setAttribute('readonly', '');
+                textareaOculto.style.position = 'fixed';
+                textareaOculto.style.top = '-9999px';
+                textareaOculto.style.left = '-9999px';
+                textareaOculto.style.opacity = '0';
+                document.body.appendChild(textareaOculto);
+                
+                textareaOculto.select();
+                textareaOculto.setSelectionRange(0, textareaOculto.value.length);
+                
+                try {
+                    copiadoExitoso = document.execCommand('copy');
+                } catch (err) {
+                    copiadoExitoso = false;
+                }
+                document.body.removeChild(textareaOculto);
+            }
+
+            if (copiadoExitoso) {
+                if (modo === 'plano') {
+                    mostrarToast(
+                        'Texto plano copiado (sin formato)',
+                        'Listo para pegar directamente en Word o Google Docs sin alterar tus estilos.'
+                    );
+                } else {
+                    mostrarToast(
+                        'Título copiado al portapapeles',
+                        'Copiado limpio y sin punto final.'
+                    );
+                }
+            } else {
+                mostrarToast('No se pudo copiar automáticamente', 'Selecciona el texto de la vista previa y presiona Ctrl+C.', true);
+            }
+        }
+
+        // Mostrar notificación visual Toast
+        let timeoutToast;
+        function mostrarToast(titulo, subtitulo, esAdvertencia = false) {
+            const toast = document.getElementById('toastNotificacion');
+            const toastTitulo = document.getElementById('toastTitulo');
+            const toastSubtitulo = document.getElementById('toastSubtitulo');
+
+            toastTitulo.textContent = titulo;
+            toastSubtitulo.textContent = subtitulo;
+
+            if (esAdvertencia) {
+                toast.classList.remove('bg-unasam-blue');
+                toast.classList.add('bg-slate-800');
+            } else {
+                toast.classList.remove('bg-slate-800');
+                toast.classList.add('bg-unasam-blue');
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(timeoutToast);
+            timeoutToast = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3200);
+        }
+
+        // Cargar un ejemplo realista de tesis de Administración UNASAM
+        function cargarEjemplo() {
+            // Alternar entre un ejemplo correlacional bivariado y uno explicativo multivariado
+            const usarMultivariado = estado.tipoVariables === 'bivariada';
+
+            if (usarMultivariado) {
+                cambiarNivel('explicativo');
+                cambiarTipoVariables('multivariada');
+                
+                // Limpiar y llenar variables
+                limpiarVariablesExtra('contenedorVars1');
+                limpiarVariablesExtra('contenedorVars2');
+
+                document.getElementById('var1_0').value = 'El liderazgo transformacional';
+                agregarVariable(1, 'la cultura organizacional');
+
+                document.getElementById('selectConector').value = 'y su influencia en';
+                manejarCambioConector();
+
+                document.getElementById('var2_0').value = 'el desempeño laboral';
+                document.getElementById('inputPoblacion').value = 'en los trabajadores administrativos';
+                document.getElementById('inputOrganizacion').value = 'de la Municipalidad Provincial de Huaraz';
+                document.getElementById('inputLugar').value = 'Huaraz';
+                document.getElementById('inputAnio').value = '2026';
+            } else {
+                cambiarNivel('correlacional');
+                cambiarTipoVariables('bivariada');
+
+                document.getElementById('var1_0').value = 'La calidad de servicio';
+                document.getElementById('selectConector').value = 'y su relación con';
+                manejarCambioConector();
+
+                document.getElementById('var2_0').value = 'la fidelización de los clientes';
+                document.getElementById('inputPoblacion').value = 'en los hoteles de tres estrellas';
+                document.getElementById('inputOrganizacion').value = 'del distrito de Huaraz';
+                document.getElementById('inputLugar').value = 'Áncash';
+                document.getElementById('inputAnio').value = '2026';
+            }
+
+            actualizarTitulo();
+            mostrarToast('Ejemplo cargado', 'Puedes editar cualquiera de los campos a tu medida.');
+        }
+
+        // Limpiar todos los campos del formulario
+        function limpiarFormulario() {
+            cambiarNivel('correlacional');
+            cambiarTipoVariables('bivariada');
+
+            document.getElementById('var1_0').value = '';
+            document.getElementById('var2_0').value = '';
+            document.getElementById('inputConectorPersonalizado').value = '';
+            document.getElementById('inputPoblacion').value = '';
+            document.getElementById('inputOrganizacion').value = '';
+            document.getElementById('inputLugar').value = '';
+            document.getElementById('inputAnio').value = '2026';
+            document.getElementById('selectCapitalizacion').value = 'oracion';
+            document.getElementById('selectSeparadorFinal').value = 'coma';
+
+            actualizarTitulo();
+            mostrarToast('Campos reiniciados', 'El formulario está listo para un nuevo título.');
+        }
+    </script>
+</body>
+</html>
